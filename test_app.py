@@ -1,4 +1,4 @@
-from fitness_app import fitness_report
+from app import fitness_report
 
 def test_fitness_report():
     expected_output = (
