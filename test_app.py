@@ -1,9 +1,15 @@
-from app import apply_leave
+from fitness_app import fitness_report
 
-def test_apply_leave():
-    result = apply_leave("John", "E101", "Sick", 3)
+def test_fitness_report():
+    expected_output = (
+        "----- Fitness Report -----\n"
+        "Name            : Niranjan\n"
+        "Steps Taken     : 8000\n"
+        "Calories Burned : 500\n"
+        "Workout Time    : 30 minutes\n"
+        "Fitness Score   : 160.00\n"
+        "Fitness Level   : Excellent"
+    )
 
-    assert result["employee_name"] == "John"
-    assert result["employee_id"] == "E101"
-    assert result["leave_type"] == "Sick"
-    assert result["days"] == 3
+    result = fitness_report("Niranjan", 8000, 500, 30)
+    assert result == expected_output

@@ -1,35 +1,41 @@
 import sys
 
-def calculate_gross_salary(basic):
-    hra = basic * 0.2
-    da = basic * 0.1
-    return basic + hra + da
+def calculate_fitness_level(score):
+    if score >= 90:
+        return "Excellent"
+    elif score >= 70:
+        return "Very Good"
+    elif score >= 50:
+        return "Good"
+    else:
+        return "Needs Improvement"
 
-def get_employee_details():
-    if len(sys.argv) != 4:
-        print("Usage: python app.py <employee_name> <employee_id> <basic_salary>")
+
+def fitness_report(name, steps, calories, workout_time):
+    fitness_score = (steps / 100) + (calories / 10) + workout_time
+    level = calculate_fitness_level(fitness_score)
+
+    report = (
+        "----- Fitness Report -----\n"
+        f"Name            : {name}\n"
+        f"Steps Taken     : {steps}\n"
+        f"Calories Burned : {calories}\n"
+        f"Workout Time    : {workout_time} minutes\n"
+        f"Fitness Score   : {fitness_score:.2f}\n"
+        f"Fitness Level   : {level}"
+    )
+    return report
+
+
+# CLI execution only (NOT during pytest import)
+if __name__ == "__main__":
+    if len(sys.argv) != 5:
+        print("Usage: python fitness_app.py Name Steps Calories WorkoutTime")
         sys.exit(1)
 
     name = sys.argv[1]
-    emp_id = sys.argv[2]
-    basic = float(sys.argv[3])
+    steps = int(sys.argv[2])
+    calories = int(sys.argv[3])
+    workout_time = int(sys.argv[4])
 
-    gross_salary = calculate_gross_salary(basic)
-
-    return {
-        "name": name,
-        "emp_id": emp_id,
-        "basic": basic,
-        "gross_salary": gross_salary
-    }
-
-def display_employee(employee):
-    print("Employee Salary Details")
-    print("Name:", employee["name"])
-    print("ID:", employee["emp_id"])
-    print("Basic Salary:", employee["basic"])
-    print("Gross Salary:", employee["gross_salary"])
-
-if __name__ == "__main__":
-    employee = get_employee_details()
-    display_employee(employee)
+    print(fitness_report(name, steps, calories, workout_time))
