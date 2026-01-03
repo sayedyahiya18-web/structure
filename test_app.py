@@ -11,5 +11,5 @@ def test_fitness_report():
         "Fitness Level:Excellent"
     )
 
-    result=fitness_report("Sayed",7000,500,30)
+    result =fitness_report("Sayed",7000,500,30)
     assert result==expected_output
